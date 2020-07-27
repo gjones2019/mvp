@@ -22,7 +22,7 @@ class App extends Component {
                 items: res.data
             })
         }).catch(err => console.log(err));
-    }
+    } 
 
   render() {
     return (

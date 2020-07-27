@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [],
+        }
+    }
+
   render() {
-    return (<h1>Hello World, React!</h1>);
+    return (
+        <h1>PokeDex</h1>
+    );
   }
 }
 
-// const App = () => <div>HELLO WORLDDDDDD FROM REACT!</div>;
 
 export default App;

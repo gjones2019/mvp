@@ -9,6 +9,7 @@ class App extends Component {
             item: {},
             items: [],
         }
+        this.catchRelease = this.catchRelease.bind(this);
     }
 //catch pokemon button (save)
 //evolve pokemon (update)
@@ -17,18 +18,22 @@ class App extends Component {
     componentDidMount() {
         axios.get('https://pokeapi.co/api/v2/pokemon')
         .then(res => {
-            console.log('RES', res);
+            // console.log('RES', res);
             this.setState({
                 items: res.data
             })
         }).catch(err => console.log(err));
     } 
 
+    catchRelease() {
+        console.log('WHOOOOOA')
+    }
+
   render() {
     return (
         <div>
         <h1>PokeDex</h1>
-        <PokemonList {...this.state}/>
+        <PokemonList {...this.state} onClick={this.catchRelease}/>
         </div>
     );
   }

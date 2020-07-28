@@ -2,7 +2,7 @@ import React from 'react';
 
 const CaughtPokemon = (props) => {
     const{ allPokemon, releaseEm, currentPokemon, caughtPokemon } = props;
-    if (caughtPokemon) {
+    if (caughtPokemon.length >= 1) {
     return (
     <div>
       <h4>Caught List</h4>

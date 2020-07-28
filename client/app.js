@@ -15,11 +15,10 @@ class App extends Component {
         this.releaseEm = this.releaseEm.bind(this);
         // this.ax = this.ax.bind(this);
     }
-//catch pokemon button (save)
-//delete pokemon (delete)
 //evolve pokemon (update)
     //new call to api with pokemon name on the end
 // view caught pokemon
+//pull caught pokemon from mongo and setState in componentDidMount
     componentDidMount() {
         axios.get('https://pokeapi.co/api/v2/pokemon')
         .then(res => {
@@ -60,13 +59,13 @@ class App extends Component {
         const filtered = caughtPokemon.filter(char => char !== pokemon);
         allPokemon.results.splice(index, 0, pokemon);
         this.setState({caughtPokemon: filtered, allPokemon: allPokemon});
-        console.log('released Pokemon chosen')
-        // axios.delete('http://localhost:8080/server/delete/', pokemon)
-        //     .then((res) => {
-        //         console.log('pokemon successfully deleted!', res.data)
-        //     }).catch((error) => {
-        //         console.log('error', error)
-        //     })
+        console.log('released Pokemon chosen', pokemon)
+        axios.delete('http://localhost:8080/server/delete/'+ pokemon.name)
+            .then((res) => {
+                console.log('pokemon successfully deleted!', res.data)
+            }).catch((error) => {
+                console.log('error', error)
+            })
     }
 
   render() {

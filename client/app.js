@@ -13,7 +13,8 @@ class App extends Component {
         }
         this.catchEm = this.catchEm.bind(this);
         this.releaseEm = this.releaseEm.bind(this);
-        // this.ax = this.ax.bind(this);
+        this.update = this.update.bind(this);
+        // const myStorage = window.localStorage;
     }
 //evolve pokemon (update)
     //new call to api with pokemon name on the end
@@ -26,10 +27,22 @@ class App extends Component {
             this.setState({
                 allPokemon: res.data
             })
+            // if (this.caughtPokemon !== undefined) {
+            //     this.caughtPokemon.forEach(caught => {
+            //     if (this.allPokemon.includes(caught)){
+            //         let filtered = this.allPokemon.filter(char => char !== caught)
+            //         this.setState({allPokemon: filtered})
+            //     }
+            // })}
             //get from database in another .then
             //merge and update
-        }).catch(err => console.log(err));
+        }).then(this.update()).catch(err => console.log(err));
+    }
 
+    update() {
+        axios.get('http://localhost:8080/server/caught')
+        .then(res => this.setState({caughtPokemon: res.data}))
+        .catch(err => console.log(err))
     }
 
     catchEm(pokemon, index) {
@@ -40,11 +53,11 @@ class App extends Component {
             caughtPokemon.push(pokemon);
             allPokemon.results.splice(index, 1)
             this.setState({allPokemon: allPokemon});
-            pokemon = {id: index, name: pokemon.name, url: pokemon.url}
-            console.log('pokemon to post', pokemon)
+            // pokemon = {id: index, name: pokemon.name, url: pokemon.url}
+            // console.log('pokemon to post', pokemon)
             axios.post('http://localhost:8080/server/create', pokemon)
                 .then((res) => {
-                    console.log('RES.DATA', res.data)
+                    console.log('Caught')
                 }).catch((error) => {
                     console.log('error', error)
                 });
@@ -62,7 +75,7 @@ class App extends Component {
         console.log('released Pokemon chosen', pokemon)
         axios.delete('http://localhost:8080/server/delete/'+ pokemon.name)
             .then((res) => {
-                console.log('pokemon successfully deleted!', res.data)
+                console.log(res.data)
             }).catch((error) => {
                 console.log('error', error)
             })

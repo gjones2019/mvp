@@ -43,13 +43,25 @@ const pokemon = mongoose.model('mvp', pokeDex);
 
 app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
 
+//get caughtList
+router.get('/caught', (req, res) => {
+  pokemon.find({}, (err, data) => {
+    if (err) {
+      console.log('err', err)
+    } else {
+      console.log('Caught Pokemon')
+                res.json(data)
+            }
+})
+})
+
 // create
 router.post('/create', (req, res) => {
   pokemon.create(req.body, (err, data) => {
     if (err) {
       console.log('err', err)
     } else {
-      console.log('THIS IS THE DATA FROM POST', data)
+      console.log('Caught Pokemon')
                 res.json(data)
             }
         })
@@ -62,14 +74,15 @@ router.delete('/delete/:name', (req, res) => {
             if (err) {
                 console.log('err', err)
             } else {
-                console.log('THIS IS THE DATA FROM DELETE', data)
-                res.json(data)
+                console.log('Released Pokemon');
+                res.json(data);
             }
         })
 })
 
 
 //update
+//put
 
 
 

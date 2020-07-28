@@ -10,11 +10,12 @@ class App extends Component {
             caughtPokemon: [],
             allPokemon: [],
         }
-        this.catchRelease = this.catchRelease.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 //catch pokemon button (save)
+//delete pokemon (delete)
 //evolve pokemon (update)
-//delete pokemon
 // view caught pokemon
     componentDidMount() {
         axios.get('https://pokeapi.co/api/v2/pokemon')
@@ -24,19 +25,26 @@ class App extends Component {
                 allPokemon: res.data
             })
         }).catch(err => console.log(err));
-    } 
+    }
 
-    catchRelease(event) {
-        console.log(event)
-        console.log('current Pokemon')
-        // this.setState({currentPokemon: event.target.value})
+    handleClick(pokemon) {
+        const { currentPokemon, caughtPokemon, allPokemon } = this.state;
+        console.log('current Pokemon chosen', pokemon)
+        this.setState({currentPokemon: pokemon})
+        if (!caughtPokemon.includes(currentPokemon)) {
+            caughtPokemon.push(currentPokemon);
+        } else {
+            const filtered = caughtPokemon.filter(pokemon => pokemon !== currentPokemon);
+            this.setState({caughtPokemon: filtered});
+        }
     }
 
   render() {
+      console.log(this.state.caughtPokemon)
     return (
         <div>
         <h1>PokeDex</h1>
-        <PokemonList {...this.state} onClick={this.catchRelease}/>
+        <PokemonList {...this.state} onClick={this.handleClick}/>
         </div>
     );
   }

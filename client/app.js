@@ -11,8 +11,8 @@ class App extends Component {
             caughtPokemon: [],
             allPokemon: [],
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.catchEm = this.catchEm.bind(this);
+        this.releaseEm = this.releaseEm.bind(this);
     }
 //catch pokemon button (save)
 //delete pokemon (delete)
@@ -29,41 +29,41 @@ class App extends Component {
         }).catch(err => console.log(err));
     }
 
-    handleClick(pokemon) {
-        const { currentPokemon = [], caughtPokemon, allPokemon } = this.state;
-        console.log('current Pokemon chosen', pokemon)
+    catchEm(pokemon, index) {
+        const { currentPokemon, caughtPokemon, allPokemon } = this.state;
+        // console.log('current Pokemon chosen', pokemon)
         // this.setState({currentPokemon: pokemon}, () => {
-        this.setState({currentPokemon: pokemon}, () => (console.log(currentPokemon)))
+        this.setState({currentPokemon: pokemon}, () => (console.log('current Pokemon chosen', pokemon)))
 
-            // if (currentPokemon  === null) {
-            //     return;
-            // } else {
-        if (!caughtPokemon.includes(currentPokemon)) {
-            caughtPokemon.push(currentPokemon);
+        if (!caughtPokemon.includes(pokemon)) {
+            caughtPokemon.push(pokemon);
+            // this.setState({allPokemon: delete allPokemon[index]})
+            allPokemon.results.splice(index, 1)
+            this.setState({allPokemon: allPokemon});
         } else {
-        //     const filtered = caughtPokemon.filter(pokemon => pokemon !== currentPokemon);
-        //     this.setState({caughtPokemon: filtered});
         null
         }
-    // }
-    // })
     }
 
-    handleChange(pokemon) {
+    releaseEm(pokemon, index) {
         const { currentPokemon, caughtPokemon, allPokemon } = this.state;
         // this.setState({currentPokemon: pokemon})
+        const filtered = caughtPokemon.filter(char => char !== pokemon);
+        // let arr = allPokemon.results;
+        // function insertAt(arr, index, ...elementsArray) {
+        //     allPokemon.results.splice(index, 0, ...elements);
+        // }
+        // const added = allPokemon.results.splice(index, 0, ...pokemon)
+        this.setState({caughtPokemon: filtered});
         console.log('released Pokemon chosen')
-            // const filtered = caughtPokemon.filter(pokemon => pokemon !== currentPokemon);
-            // this.setState({caughtPokemon: filtered});
     }
 
   render() {
-      console.log(this.state.caughtPokemon)
     return (
         <div>
         <h1>PokeDex</h1>
-        <PokemonList {...this.state} onClick={this.handleClick}/>
-        <CaughtPokemon {...this.state} onChange={this.handleChange}/>
+        <PokemonList {...this.state} catchEm={this.catchEm}/>
+        <CaughtPokemon {...this.state} releaseEm={this.releaseEm}/>
         </div>
     );
   }

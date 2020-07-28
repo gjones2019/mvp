@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PokemonList = (props) => {
-    const { allPokemon, onClick, currentPokemon } = props;
+    const { allPokemon, catchEm, currentPokemon } = props;
     if (allPokemon.results) {
     return (
     <div>
@@ -11,7 +11,7 @@ const PokemonList = (props) => {
         (
         <div>
             <li key={index}>{pokemon.name}</li>
-            <button onClick={() => onClick(pokemon)}>Catch</button>
+            <button onClick={() => catchEm(pokemon, index)}>Catch</button>
         </div>
         )
         )}

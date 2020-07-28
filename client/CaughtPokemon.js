@@ -2,7 +2,7 @@ import React from 'react';
 
 const CaughtPokemon = (props) => {
     // console.log('PROSSSS', props)
-    const{ allPokemon, onChange, currentPokemon, caughtPokemon } = props;
+    const{ allPokemon, releaseEm, currentPokemon, caughtPokemon } = props;
 //get div button and li element by id?
     if (caughtPokemon) {
     return (
@@ -13,7 +13,7 @@ const CaughtPokemon = (props) => {
         (
         <div>
             <li key={index}>{pokemon.name}</li>
-            <button onChange={() => onChange(pokemon)}>Release</button>
+            <button onClick={() => releaseEm(pokemon, index)}>Release</button>
         </div>
         )
         )}

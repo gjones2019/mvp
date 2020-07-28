@@ -7,9 +7,10 @@ const { PORT } = process.env;
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // const pokemon = mongoose.model('mvp', pokeDex);
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
 const router = express.Router();
-const bodyParser= require('body-parser');
-app.use('/server/server', cors(), router)
+app.use('/server', cors(), router)
 
 mongoose.connect('mongodb://localhost/mvp', {
     useNewUrlParser: true,
@@ -17,7 +18,6 @@ mongoose.connect('mongodb://localhost/mvp', {
 })
   .then(() => {
     console.log("Connected to the DB");
-    // const db = client.db('mvp');
   })
   .catch((err) => {
     console.error('Error connecting to the DB');
@@ -39,39 +39,37 @@ mongoose.connect('mongodb://localhost/mvp', {
 
 const pokemon = mongoose.model('mvp', pokeDex);
 
-
-// const corsOptions = {
-//   origin: 'http://localhost',
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
-app.use(cors);
-app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
 
+// app.get('/find', (req, res) => {
+//   // show lyrics from DB
+//   pokemon.find({}).then((results) => {
+//     res.send(JSON.stringify(results));
+//   });
+// });
+
 // create
-router.post('/', (req, res) => {
-  console.log('Hellooooooooooooooooo!')
+router.post('/create', (req, res) => {
   pokemon.create(req.body, (err, data) => {
             if (err) {
                 console.log('err', err)
             } else {
-                console.log(data)
+                console.log('THIS IS THE DATA FROM POST', data)
                 res.json(data)
             }
         })
 })
 
-// router.route('/create').post((req, res, next) => {
-//     user.create(req.body, (error, data) => {
-//         if (error) {
-//             return next(error)
-//         } else {
-//             console.log(data)
-//             res.json(data)
-//         }
-//     })
-// });
-
+// router.delete('/delete', (req, res) => {
+//   pokemon.findByIdAndDelete(req.body.id, (err, data) => {
+//             if (err) {
+//                 console.log('err', err)
+//             } else {
+//                 console.log('THIS IS THE DATA FROM DELETE', data)
+//                 res.json(data)
+//             }
+//         })
+// })
 
 //delete
 

@@ -13,6 +13,7 @@ class App extends Component {
         }
         this.catchEm = this.catchEm.bind(this);
         this.releaseEm = this.releaseEm.bind(this);
+        // this.ax = this.ax.bind(this);
     }
 //catch pokemon button (save)
 //delete pokemon (delete)
@@ -29,6 +30,7 @@ class App extends Component {
             //get from database in another .then
             //merge and update
         }).catch(err => console.log(err));
+
     }
 
     catchEm(pokemon, index) {
@@ -39,11 +41,11 @@ class App extends Component {
             caughtPokemon.push(pokemon);
             allPokemon.results.splice(index, 1)
             this.setState({allPokemon: allPokemon});
-                // const params = {id: pokemon.id, name: pokemon.name, url: pokemon.url}
-            axios.post('http://localhost:8080/server/server', pokemon)
-                .then((res, req) => {
-                    console.log('RES.DATA', res)
-                    console.log(req)
+            pokemon = {id: index, name: pokemon.name, url: pokemon.url}
+            console.log('pokemon to post', pokemon)
+            axios.post('http://localhost:8080/server/create', pokemon)
+                .then((res) => {
+                    console.log('RES.DATA', res.data)
                 }).catch((error) => {
                     console.log('error', error)
                 });
@@ -51,17 +53,20 @@ class App extends Component {
         null
         }
     }
-        // axios.post('/create', caughtPokemon)
-        // .then(res => console.log(res.data))
-        // .catch(err => console.log('ERR in axios post', err));
-    
+
 
     releaseEm(pokemon, index) {
         const { currentPokemon, caughtPokemon, allPokemon } = this.state;
         const filtered = caughtPokemon.filter(char => char !== pokemon);
         allPokemon.results.splice(index, 0, pokemon);
         this.setState({caughtPokemon: filtered, allPokemon: allPokemon});
-        console.log('released Pokemon chosen') 
+        console.log('released Pokemon chosen')
+        // axios.delete('http://localhost:8080/server/delete/', pokemon)
+        //     .then((res) => {
+        //         console.log('pokemon successfully deleted!', res.data)
+        //     }).catch((error) => {
+        //         console.log('error', error)
+        //     })
     }
 
   render() {

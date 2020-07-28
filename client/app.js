@@ -6,8 +6,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item: {},
-            items: [],
+            currentPokemon: {},
+            caughtPokemon: [],
+            allPokemon: [],
         }
         this.catchRelease = this.catchRelease.bind(this);
     }
@@ -20,13 +21,15 @@ class App extends Component {
         .then(res => {
             // console.log('RES', res);
             this.setState({
-                items: res.data
+                allPokemon: res.data
             })
         }).catch(err => console.log(err));
     } 
 
-    catchRelease() {
-        console.log('WHOOOOOA')
+    catchRelease(event) {
+        console.log(event)
+        console.log('current Pokemon')
+        // this.setState({currentPokemon: event.target.value})
     }
 
   render() {

@@ -2,13 +2,13 @@ import React from 'react';
 
 const PokemonList = (props) => {
     console.log('PROSSSS', props)
-    const{ items, onClick } = props;
-    if (items.results) {
+    const{ allPokemon, onClick } = props;
+    if (allPokemon.results) {
     return (
     <div>
       <h4>List</h4>
       <ul>
-      {items.results.map(pokemon => (
+      {allPokemon.results.map(pokemon => (
         <div>
             <li key={pokemon.name}>{pokemon.name}</li>
             <button onClick={onClick} >Catch/Release</button>

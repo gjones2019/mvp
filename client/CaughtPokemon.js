@@ -13,6 +13,7 @@ const CaughtPokemon = (props) => {
         (
         <div>
             <li key={index}>{pokemon.name}</li>
+            <img src={`public/sprites/${pokemon.name}.png`} />
             <button onClick={() => releaseEm(pokemon, index)}>Release</button>
             <Moves pokemon={pokemon} index={index} />
         </div>

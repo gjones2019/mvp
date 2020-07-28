@@ -26,10 +26,10 @@ class Moves extends Component {
     render() {
         const { abilities, sprites, forms } = this.state;
         return (
-            <div>
-        <h4>Stats</h4>
+        <div>
+        {/* <img src={`public/sprites/${this.props.pokemon.name}.png`} /> */}
+            {/* <h4>Stats</h4> */}
         {/* <li>{abilities[0].ability.name}</li> */}
-        <img src={`public/sprites/${this.props.pokemon.name}.png`} />
         </div>
         )
     }

@@ -17,6 +17,7 @@ class App extends Component {
 //catch pokemon button (save)
 //delete pokemon (delete)
 //evolve pokemon (update)
+    //new call to api with pokemon name on the end
 // view caught pokemon
     componentDidMount() {
         axios.get('https://pokeapi.co/api/v2/pokemon')
@@ -31,7 +32,12 @@ class App extends Component {
     handleClick(pokemon) {
         const { currentPokemon = [], caughtPokemon, allPokemon } = this.state;
         console.log('current Pokemon chosen', pokemon)
-        this.setState({currentPokemon: pokemon}, () => {
+        // this.setState({currentPokemon: pokemon}, () => {
+        this.setState({currentPokemon: pokemon}, () => (console.log(currentPokemon)))
+
+            // if (currentPokemon  === null) {
+            //     return;
+            // } else {
         if (!caughtPokemon.includes(currentPokemon)) {
             caughtPokemon.push(currentPokemon);
         } else {
@@ -39,7 +45,8 @@ class App extends Component {
         //     this.setState({caughtPokemon: filtered});
         null
         }
-    })
+    // }
+    // })
     }
 
     handleChange(pokemon) {

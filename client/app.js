@@ -31,13 +31,10 @@ class App extends Component {
 
     catchEm(pokemon, index) {
         const { currentPokemon, caughtPokemon, allPokemon } = this.state;
-        // console.log('current Pokemon chosen', pokemon)
-        // this.setState({currentPokemon: pokemon}, () => {
         this.setState({currentPokemon: pokemon}, () => (console.log('current Pokemon chosen', pokemon)))
 
         if (!caughtPokemon.includes(pokemon)) {
             caughtPokemon.push(pokemon);
-            // this.setState({allPokemon: delete allPokemon[index]})
             allPokemon.results.splice(index, 1)
             this.setState({allPokemon: allPokemon});
         } else {
@@ -47,14 +44,9 @@ class App extends Component {
 
     releaseEm(pokemon, index) {
         const { currentPokemon, caughtPokemon, allPokemon } = this.state;
-        // this.setState({currentPokemon: pokemon})
         const filtered = caughtPokemon.filter(char => char !== pokemon);
-        // let arr = allPokemon.results;
-        // function insertAt(arr, index, ...elementsArray) {
-        //     allPokemon.results.splice(index, 0, ...elements);
-        // }
-        // const added = allPokemon.results.splice(index, 0, ...pokemon)
-        this.setState({caughtPokemon: filtered});
+        allPokemon.results.splice(index, 0, pokemon);
+        this.setState({caughtPokemon: filtered, allPokemon: allPokemon});
         console.log('released Pokemon chosen')
     }
 

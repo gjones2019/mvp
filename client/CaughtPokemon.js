@@ -1,9 +1,7 @@
 import React from 'react';
 
 const CaughtPokemon = (props) => {
-    // console.log('PROSSSS', props)
     const{ allPokemon, releaseEm, currentPokemon, caughtPokemon } = props;
-//get div button and li element by id?
     if (caughtPokemon) {
     return (
     <div>

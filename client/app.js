@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PokemonList from './PokemonList.js'
+import PokemonList from './PokemonList.js';
+import CaughtPokemon from './CaughtPokemon.js';
 
 class App extends Component {
     constructor(props) {
@@ -28,15 +29,25 @@ class App extends Component {
     }
 
     handleClick(pokemon) {
-        const { currentPokemon, caughtPokemon, allPokemon } = this.state;
+        const { currentPokemon = [], caughtPokemon, allPokemon } = this.state;
         console.log('current Pokemon chosen', pokemon)
-        this.setState({currentPokemon: pokemon})
+        this.setState({currentPokemon: pokemon}, () => {
         if (!caughtPokemon.includes(currentPokemon)) {
             caughtPokemon.push(currentPokemon);
         } else {
-            const filtered = caughtPokemon.filter(pokemon => pokemon !== currentPokemon);
-            this.setState({caughtPokemon: filtered});
+        //     const filtered = caughtPokemon.filter(pokemon => pokemon !== currentPokemon);
+        //     this.setState({caughtPokemon: filtered});
+        null
         }
+    })
+    }
+
+    handleChange(pokemon) {
+        const { currentPokemon, caughtPokemon, allPokemon } = this.state;
+        // this.setState({currentPokemon: pokemon})
+        console.log('released Pokemon chosen')
+            // const filtered = caughtPokemon.filter(pokemon => pokemon !== currentPokemon);
+            // this.setState({caughtPokemon: filtered});
     }
 
   render() {
@@ -45,6 +56,7 @@ class App extends Component {
         <div>
         <h1>PokeDex</h1>
         <PokemonList {...this.state} onClick={this.handleClick}/>
+        <CaughtPokemon {...this.state} onChange={this.handleChange}/>
         </div>
     );
   }

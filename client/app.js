@@ -24,6 +24,7 @@ class App extends Component {
         axios.get('https://pokeapi.co/api/v2/pokemon')
         .then(res => {
             // console.log('RES', res)
+            // uniq = res.data.unique()
             this.setState({
                 allPokemon: res.data
             })
@@ -58,7 +59,7 @@ class App extends Component {
             axios.post('http://localhost:8080/server/create', pokemon)
                 .then((res) => {
                     console.log('Caught')
-                }).catch((error) => {
+                }).catch((error) => { 
                     console.log('error', error)
                 });
         } else {

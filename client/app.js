@@ -48,7 +48,7 @@ class App extends Component {
 
     catchEm(pokemon, index) {
         const { currentPokemon, caughtPokemon, allPokemon } = this.state;
-        this.setState({currentPokemon: pokemon}, () => (console.log('current Pokemon chosen', pokemon)))
+        this.setState({currentPokemon: pokemon}, () => (console.log('current Pokemon chosen')))
 
         if (!caughtPokemon.includes(pokemon)) {
             caughtPokemon.push(pokemon);
@@ -76,7 +76,7 @@ class App extends Component {
         console.log('released Pokemon chosen', pokemon)
         axios.delete('http://localhost:8080/server/delete/'+ pokemon.name)
             .then((res) => {
-                console.log(res.data)
+                console.log('released')
             }).catch((error) => {
                 console.log('error', error)
             })

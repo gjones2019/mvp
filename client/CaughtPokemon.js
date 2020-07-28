@@ -1,7 +1,9 @@
 import React from 'react';
+import Moves from './Moves.js';
 
 const CaughtPokemon = (props) => {
     const{ allPokemon, releaseEm, currentPokemon, caughtPokemon } = props;
+    console.log('props', props)
     if (caughtPokemon.length >= 1) {
     return (
     <div>
@@ -12,6 +14,7 @@ const CaughtPokemon = (props) => {
         <div>
             <li key={index}>{pokemon.name}</li>
             <button onClick={() => releaseEm(pokemon, index)}>Release</button>
+            <Moves pokemon={pokemon} index={index} />
         </div>
         )
         )}

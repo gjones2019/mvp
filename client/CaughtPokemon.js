@@ -3,7 +3,6 @@ import Moves from './Moves.js';
 
 const CaughtPokemon = (props) => {
     const{ allPokemon, releaseEm, currentPokemon, caughtPokemon } = props;
-    console.log('props', props)
     if (caughtPokemon.length >= 1) {
     return (
     <div>
@@ -15,7 +14,7 @@ const CaughtPokemon = (props) => {
             <li key={index}>{pokemon.name}</li>
             <img src={`public/sprites/${pokemon.name}.png`} />
             <button onClick={() => releaseEm(pokemon, index)}>Release</button>
-            <Moves pokemon={pokemon} index={index} />
+            <Moves pokemon={pokemon} index={index} {...props}/>
         </div>
         )
         )}

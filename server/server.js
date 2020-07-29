@@ -36,6 +36,9 @@ mongoose.connect('mongodb://localhost/mvp', {
     },
     url: {
         type: String
+    },
+    nickname: {
+      type: String
     }
 }, {
         collection: 'users'
@@ -83,6 +86,27 @@ router.delete('/delete/:name', (req, res) => {
 
 //update
 //put
+router.put('/upgrade/:name', (req, res) => {
+  console.log('REQBODY PUT', req.body)
+  console.log('REQ PARAMS PUT', req.params)
+  console.log('777')
+  pokemon.update(
+    { "name": { $eq: req.params.name } }, req.body, (err,data) => {
+            if (err) {
+                console.log('err', err)
+            } else {
+                console.log('Updated Name');
+                res.json(data);
+            }
+        })
+})
+
+// router.put('/:id', function(req, res, next) {
+//   Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+//     if (err) return next(err);
+//     res.json(post);
+//   });
+// });
 
 
 

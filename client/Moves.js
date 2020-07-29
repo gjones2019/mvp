@@ -2,49 +2,94 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Moves extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            abilities: [],
-            forms: [],
-        }
-        this.evolve = this.evolve.bind(this);
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			value: ''
+		};
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
-    componentDidMount() {
+	handleChange(event) {
+		this.setState({ value: event.target.value });
+	}
+
+	handleSubmit(event) {
+        event.preventDefault();
+        console.log(this.state.value)
         console.log(this.props.pokemon.name)
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${this.props.index}`)
-        .then(res => {
-            this.setState({
-                abilities: res.data.abilities,
-                forms: res.data.forms,
-                sprites: res.data.sprites,
+        const { value } = this.state
+        //upgrade route
+        axios.put('http://localhost:8080/server/upgrade/'+ this.props.pokemon.name, { name: value })
+            .then((res) => {
+                console.log('released')
+            }).catch((error) => {
+                console.log('error', error)
             })
-            console.log(this.state)
-        }).catch(err => console.log(err));
-    }
+	}
+	// evolution(props) {
+	// 	if (props.pokemon.name === 'bulbasaur' || 'ivysaur' || 'venusaur') {
+	// 		props.pokemon.evolutionId = 1;
+	//     }
+	//     if (props.pokemon.name === 'charmander' || 'charmeleon' || 'charizard') {
+	// 		props.pokemon.evolutionId = 2;
+	//     }
+	//     // if (props.pokemon.name === 'squirtle' || 'wartortle' || 'blastoise') {
+	// 	// 	props.pokemon.evolutionId = 3;
+	//     // }
+	//     // if (props.pokemon.name === 'caterpie' || 'metapod' || 'butterfree') {
+	// 	// 	props.pokemon.evolutionId = 4;
+	//     // }
+	//     // if (props.pokemon.name === 'weedle' || 'kakuna' || 'beedrill') {
+	// 	// 	props.pokemon.evolutionId = 5;
+	//     // }
+	//     // if (props.pokemon.name === 'pidgey' || 'pidgeotto' || 'pidgeot') {
+	// 	// 	props.pokemon.evolutionId = 6;
+	//     // }
+	//     // if (props.pokemon.name === 'rattata' || 'raticate' || 'spearow') {
+	// 	// 	props.pokemon.evolutionId = 7;
+	//     // }
+	// }
 
-    evolve() {
-        console.log('evolved');
-    }
+	// evolve(props) {
+	//     this.evolution(props)
 
-    render() {
-        const { abilities, sprites, forms } = this.state;
-        return (
-        <div>
-            <button onClick={this.evolve}>Evolve</button>{' '}
-        </div>
-        )
-    }
+	// 	const url = `https://pokeapi.co/api/v2/evolution-chain/${props.pokemon.evolutionId}?`;
+	// 	axios
+	// 		.get(url)
+	// 		.then((res) => {
+	// 			this.setState({name: res.data.chain.evolves_to[0].evolves_to[0].species.name})
+	//             this.props.currentPokemon = res.data.chain.evolves_to[0].evolves_to[0].species.name
+	//         })
+	// 		.catch((err) => console.log(err));
+	// }
+
+	// componentDidUpdate(props) {
+	//     if (this.state.name !== '') {
+	//       this.render();
+	//     }
+	//   }
+
+	render() {
+
+		const { evolved } = this.state;
+		return (
+			<div>
+				<form onSubmit={this.handleSubmit}>
+					<label>
+						Give new name:
+						<input
+							type='text'
+							value={this.state.value}
+							onChange={this.handleChange}
+						/>
+					</label>
+					<input type='submit' value='Submit' />
+				</form>
+			</div>
+		);
+	}
 }
 
-    export default Moves;
-
-
-// const Moves = (props) => {
-
-
-//     return <h1>Hello, {props.name}</h1>;
-//   }
-
-//   export default Moves;
+export default Moves;

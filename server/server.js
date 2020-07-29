@@ -87,9 +87,6 @@ router.delete('/delete/:name', (req, res) => {
 //update
 //put
 router.put('/upgrade/:name', (req, res) => {
-  console.log('REQBODY PUT', req.body)
-  console.log('REQ PARAMS PUT', req.params)
-  console.log('777')
   pokemon.update(
     { "name": { $eq: req.params.name } }, req.body, (err,data) => {
             if (err) {
@@ -100,14 +97,6 @@ router.put('/upgrade/:name', (req, res) => {
             }
         })
 })
-
-// router.put('/:id', function(req, res, next) {
-//   Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
-//     if (err) return next(err);
-//     res.json(post);
-//   });
-// });
-
 
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

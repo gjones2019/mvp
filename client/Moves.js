@@ -8,6 +8,7 @@ class Moves extends Component {
             abilities: [],
             forms: [],
         }
+        this.evolve = this.evolve.bind(this);
     }
 
     componentDidMount() {
@@ -23,13 +24,15 @@ class Moves extends Component {
         }).catch(err => console.log(err));
     }
 
+    evolve() {
+        console.log('evolved');
+    }
+
     render() {
         const { abilities, sprites, forms } = this.state;
         return (
         <div>
-        {/* <img src={`public/sprites/${this.props.pokemon.name}.png`} /> */}
-            {/* <h4>Stats</h4> */}
-        {/* <li>{abilities[0].ability.name}</li> */}
+            <button onClick={this.evolve}>Evolve</button>{' '}
         </div>
         )
     }

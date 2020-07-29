@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({
 }));
 const router = express.Router();
 app.use('/server', cors(), router)
+app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
+
 
 mongoose.connect('mongodb://localhost/mvp', {
     useNewUrlParser: true,
@@ -40,8 +42,6 @@ mongoose.connect('mongodb://localhost/mvp', {
     })
 
 const pokemon = mongoose.model('mvp', pokeDex);
-
-app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
 
 //get caughtList
 router.get('/caught', (req, res) => {

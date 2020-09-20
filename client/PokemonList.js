@@ -5,7 +5,7 @@ const PokemonList = (props) => {
     if (allPokemon.results) {
     return (
     <div>
-      <h4>List</h4>
+      <h4>Wild Pokemon</h4>
       <ul>
       {allPokemon.results.map((pokemon, index) =>
         (

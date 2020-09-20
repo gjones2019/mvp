@@ -66,7 +66,7 @@ class App extends Component {
   render() {
     return (
         <div>
-        <h1>PokeDex</h1>
+        <h1>Catch and Release</h1>
         <PokemonList {...this.state} catchEm={this.catchEm}/>
         <CaughtPokemon {...this.state} releaseEm={this.releaseEm}/>
         </div>

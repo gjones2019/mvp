@@ -6,7 +6,7 @@ const CaughtPokemon = (props) => {
     if (caughtPokemon.length >= 1) {
     return (
     <div>
-      <h4>Caught List</h4>
+      <h4>Caught Pokemon</h4>
       <ul>
       {caughtPokemon.map((pokemon, index) =>
         (
